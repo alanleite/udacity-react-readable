@@ -1,5 +1,2 @@
-import React from 'react'
-
-export default () => (
-    <div>Post</div>
-)
+import Container from './container'
+export default Container
