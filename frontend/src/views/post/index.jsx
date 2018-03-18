@@ -1,2 +1,4 @@
+import { withRouter } from 'react-router-dom'
 import Container from './container'
-export default Container
+import connector from './connector'
+export default withRouter(connector(Container))

@@ -1,5 +1,5 @@
-import { handleActions } from 'redux-actions'
 import merge from 'merge'
+import { handleActions } from 'redux-actions'
 import { entityUpdated } from '../contants'
 
 export default handleActions({

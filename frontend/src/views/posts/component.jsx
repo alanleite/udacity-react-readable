@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Grid, Label, Item, Header } from 'semantic-ui-react'
-import Post from './../../containers/post'
+import { Grid, Label, Item } from 'semantic-ui-react'
+import Post from '../../components/post'
 
 const LabelsBlock = styled.div`
   p {
@@ -27,7 +27,6 @@ export default ({
   error
 }) => (
     <Grid container>
-
       <Grid.Row>
         <Grid.Column>
           <LabelsBlock>
@@ -58,7 +57,6 @@ export default ({
           </LabelsBlock>
         </Grid.Column>
       </Grid.Row>
-
       <Grid.Row>
         <Grid.Column>
           <PostsBlock>
@@ -73,6 +71,5 @@ export default ({
           </PostsBlock>
         </Grid.Column>
       </Grid.Row>
-
     </Grid>
   )

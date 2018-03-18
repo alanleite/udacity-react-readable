@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
-import main from '../../views/main/reducers'
+import posts from '../../views/posts/reducers'
+import post from '../../views/post/reducers'
 
 export default combineReducers({
-    main
+    posts, post
 })

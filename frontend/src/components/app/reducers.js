@@ -2,10 +2,7 @@ import { handleActions } from 'redux-actions'
 import { onLoadStart, onLoadDone } from './actions'
 
 const defaultState = {
-    category: null,
-    categories: [],
-    posts: [],
-    loading: false,
+    loading: true,
     error: null
 }
 

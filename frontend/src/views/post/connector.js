@@ -1,16 +1,15 @@
 import { connect } from 'react-redux'
 import { denormalize } from 'normalizr'
-import { CategorySchema, PostSchema } from '../../module/schemas'
+import { PostSchema, CommentSchema } from '../../module/schemas'
 import { load } from './actions'
 
 const stateToProps = (state) => {
-    const view = state.views.main
-    const categories = denormalize(view.categories, [CategorySchema], state.entities) || []
-    const posts = denormalize(view.posts, [PostSchema], state.entities) || []
+    const view = state.views.post
+    const post = denormalize(view.post, PostSchema, state.entities)
+    const comments = denormalize(view.comments, [CommentSchema], state.entities) || []
     return {
-        category: view.category,
-        categories, posts,
-        loading: view.loading,
+        post, comments,
+        loading: view.loading || state.app.loading,
         error: view.error
     }
 }
