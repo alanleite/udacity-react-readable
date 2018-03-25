@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { denormalize } from 'normalizr'
 import { CategorySchema, PostSchema } from '../../module/schemas'
-import { load } from './actions'
+import { load, postVoteUp, postVoteDown } from './actions'
 
 const stateToProps = (state) => {
     const view = state.views.posts
@@ -17,7 +17,9 @@ const stateToProps = (state) => {
 
 const dispatchToProps = (dispatch) => {
     return {
-        load: (c) => dispatch(load(c))
+        load: (c) => dispatch(load(c)),
+        postVoteUp: (c) => dispatch(postVoteUp(c)),
+        postVoteDown: (c) => dispatch(postVoteDown(c))
     }
 }
 

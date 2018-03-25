@@ -24,7 +24,9 @@ export default ({
   posts = [],
   categoryUpdated,
   loading,
-  error
+  error,
+  postVoteUp,
+  postVoteDown
 }) => (
     <Grid container>
       <Grid.Row>
@@ -55,6 +57,8 @@ export default ({
               ))}
             </Label.Group>
           </LabelsBlock>
+          <br/>
+          {category && <Link to={`${category}/create-post`}>Create a post in {category} category.</Link>}
         </Grid.Column>
       </Grid.Row>
       <Grid.Row>
@@ -65,7 +69,9 @@ export default ({
               {posts.map((p, i) => (
                 <Post
                   key={i}
-                  post={p} />
+                  post={p}
+                  postVoteUp={() => { postVoteUp(p.id) }}
+                  postVoteDown={() => { postVoteDown(p.id) }} />
               ))}
             </Item.Group>
           </PostsBlock>

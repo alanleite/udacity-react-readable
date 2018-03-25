@@ -17,10 +17,20 @@ class Main extends React.Component {
         this.load(category)
     }
 
+    postVoteUp = (postId) => {
+        this.props.postVoteUp(postId)
+    }
+
+    postVoteDown = (postId) => {
+        this.props.postVoteDown(postId)
+    }
+
     render() {
         return <Component
             {...this.props}
-            categoryUpdated={this.categoryUpdated} />
+            categoryUpdated={this.categoryUpdated}
+            postVoteUp={this.postVoteUp}
+            postVoteDown={this.postVoteDown} />
     }
 
 }

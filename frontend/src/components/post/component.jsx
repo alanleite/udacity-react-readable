@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Item, Statistic, Label, Form, Button, Grid, Icon } from 'semantic-ui-react'
+import { Item, Statistic, Label, Button, Grid } from 'semantic-ui-react'
 
 const VotesContent = styled.div`
   min-width: 120;
@@ -13,8 +13,8 @@ const LabelsBlock = styled(Item.Extra)`
 
 const castDate = (d) => (new Date(d)).toDateString()
 
-export default ({ post }) => {
-  const { body, author, timestamp, commentCount, voteScore, id, category, onSubmit } = post
+export default ({ post, postVoteUp, postVoteDown }) => {
+  const { body, author, timestamp, commentCount, voteScore, id, category } = post
   return (
     <Item>
       <Item.Image size='tiny' src={`https://api.adorable.io/avatars/169/${author}@adorable.png`} rounded />
@@ -39,8 +39,8 @@ export default ({ post }) => {
           </Grid.Row>
           <Grid.Row>
             <Button.Group basic size="tiny">
-              <Button icon="thumbs outline up" />
-              <Button icon="thumbs outline down" />
+              <Button icon="thumbs outline up" onClick={postVoteUp} />
+              <Button icon="thumbs outline down" onClick={postVoteDown} />
             </Button.Group>
           </Grid.Row>
         </Grid>

@@ -1,8 +1,9 @@
 import { handleActions } from 'redux-actions'
-import { onLoadStart, onLoadDone } from './actions'
+import { onLoadStart, onLoadDone, onCommentAdded, onCommentDeleted } from './actions'
 
 const defaultState = {
     post: null,
+    comments: [],
     loading: true,
     error: null
 }
@@ -21,4 +22,16 @@ export default handleActions({
             loading: false
         }
     },
+    [onCommentAdded]: (state, { payload }) => {
+        return {
+            ...state,
+            comments: [...state.comments, payload]
+        }
+    },
+    [onCommentDeleted]: (state, { payload }) => {
+        return {
+            ...state,
+            comments: state.comments.filter(id => id !== payload)
+        }
+    }
 }, defaultState)

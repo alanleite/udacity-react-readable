@@ -40,11 +40,11 @@ export function editPost(postId, { title, body }) {
 }
 
 export function upPost(post) {
-    return axios.post(`/posts/${post}`, { options: 'upVote' })
+    return axios.post(`/posts/${post}`, { option: 'upVote' })
 }
 
 export function downPost(post) {
-    return axios.post(`/posts/${post}`, { options: 'downVote' })
+    return axios.post(`/posts/${post}`, { option: 'downVote' })
 }
 
 export function deletePost(post) {
@@ -71,11 +71,11 @@ export function getComment(commentId) {
 }
 
 export function upComment(commentId) {
-    return axios.post(`/comments/${commentId}`, { options: 'upVote' })
+    return axios.post(`/comments/${commentId}`, { option: 'upVote' })
 }
 
 export function downComment(commentId) {
-    return axios.post(`/comments/${commentId}`, { options: 'downVote' })
+    return axios.post(`/comments/${commentId}`, { option: 'downVote' })
 }
 
 export function editComment(commentId, { body }) {
