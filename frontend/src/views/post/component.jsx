@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Grid, Header, Comment, Image, Loader, Button, Label, Form } from 'semantic-ui-react'
+import { Grid, Header, Comment, Image, Loader, Button, Label, Form, Statistic } from 'semantic-ui-react'
 
 const castDate = (d) => (new Date(d)).toDateString()
 
@@ -20,12 +20,13 @@ export default ({
   commentVoteUp,
   commentVoteDown,
   onPostDelete,
-  onCommentDelete
+  onCommentDelete,
+  postVoteUp,
+  postVoteDown
 }) => {
+  if (loading || !post) return <Loader active />
 
-  if (loading || !post) return <Loader active={true} />
-
-  const { id, author, title, body, category } = post
+  const { id, author, title, body, category, voteScore } = post
 
   return (
     <Grid container>
@@ -37,24 +38,42 @@ export default ({
           <Link to={`/`}>Show all posts</Link><br />
           <Link to={`/${category.path}`}>Show all posts in the same category</Link><br />
           <Link to={`/${category.path}/${id}/edit`}>Edit this post</Link><br />
-          <a href="#" onClick={onPostDelete}>Delete this post</a>
+          <a href='#' onClick={onPostDelete}>Delete this post</a>
         </Grid.Column>
 
         <Grid.Column width={12}>
 
           {!editing && (
-            <div>
-              <Header as='h3' dividing>{title}</Header>
-              <p>{body}</p>
-            </div>
+            <Grid>
+              <Grid.Column width={12}>
+                <Header as='h3' dividing>{title}</Header>
+                <p>{body}</p>
+              </Grid.Column>
+              <Grid.Column width={4}>
+                <Grid textAlign='center'>
+                  <Grid.Row stretched>
+                    <Statistic>
+                      <Statistic.Value>{voteScore}</Statistic.Value>
+                      <Statistic.Label>Votes</Statistic.Label>
+                    </Statistic>
+                  </Grid.Row>
+                  <Grid.Row>
+                    <Button.Group basic size='tiny'>
+                      <Button icon='thumbs outline up' onClick={postVoteUp} />
+                      <Button icon='thumbs outline down' onClick={postVoteDown} />
+                    </Button.Group>
+                  </Grid.Row>
+                </Grid>
+              </Grid.Column>
+            </Grid>
           )}
 
           {editing && initialized && (
             <Form onSubmit={onSubmitEdit}>
               <Header as='h3' dividing>Editing</Header>
-              <Form.Field label="Title" control={Form.Input} name="eTitle" value={eTitle} onChange={onChange} />
-              <Form.Field label="Message" control={Form.TextArea} name="eBody" value={eBody} onChange={onChange} />
-              <Button primary type="submit" content="Save" />
+              <Form.Field label='Title' control={Form.Input} name='eTitle' value={eTitle} onChange={onChange} />
+              <Form.Field label='Message' control={Form.TextArea} name='eBody' value={eBody} onChange={onChange} />
+              <Button primary type='submit' content='Save' />
             </Form>
           )}
 
@@ -71,25 +90,25 @@ export default ({
                   </Comment.Metadata>
                   <Comment.Text>{c.body}</Comment.Text>
                   <Comment.Metadata>
-                    <Label.Group size="small">
-                      <Label basic content="Vote score: " detail={c.voteScore} />
+                    <Label.Group size='small'>
+                      <Label basic content='Vote score: ' detail={c.voteScore} />
                       <Label
                         basic
-                        as="a"
-                        color="blue"
-                        content="Like"
+                        as='a'
+                        color='blue'
+                        content='Like'
                         onClick={() => { commentVoteUp(c.id) }} />
                       <Label
                         basic
-                        as="a"
-                        color="blue"
-                        content="Dislike"
+                        as='a'
+                        color='blue'
+                        content='Dislike'
                         onClick={() => { commentVoteDown(c.id) }} />
                       <Label
                         basic
-                        as="a"
-                        color="red"
-                        content="Delete"
+                        as='a'
+                        color='red'
+                        content='Delete'
                         onClick={() => { onCommentDelete(c.id) }} />
                     </Label.Group>
                   </Comment.Metadata>
@@ -100,8 +119,8 @@ export default ({
 
           {!editing && (
             <Form onSubmit={onSubmitComment}>
-              <Form.Field width={8} control={Form.TextArea} name="eComment" label="Message" value={eComment} onChange={onChange} />
-              <Button primary type="submit" content="Reply" />
+              <Form.Field width={8} control={Form.TextArea} name='eComment' label='Message' value={eComment} onChange={onChange} />
+              <Button primary type='submit' content='Reply' />
             </Form>
           )}
 
@@ -110,5 +129,4 @@ export default ({
       </Grid.Row>
     </Grid>
   )
-
 }

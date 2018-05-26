@@ -73,6 +73,14 @@ class Post extends React.Component {
     this.props.commentDelete(id)
   }
 
+  postVoteUp = () => {
+    this.props.postVoteUp(this.props.post.id)
+  }
+
+  postVoteDown = () => {
+    this.props.postVoteDown(this.props.post.id)
+  }
+
   render() {
     return <Component
       {...this.state}
@@ -85,7 +93,10 @@ class Post extends React.Component {
       commentVoteUp={this.commentVoteUp}
       commentVoteDown={this.commentVoteDown}
       onPostDelete={this.onPostDelete}
-      onCommentDelete={this.onCommentDelete} />
+      onCommentDelete={this.onCommentDelete}
+      postVoteUp={this.postVoteUp}
+      postVoteDown={this.postVoteDown}
+      />
   }
 
 }
