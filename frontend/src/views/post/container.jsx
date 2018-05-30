@@ -7,7 +7,9 @@ class Post extends React.Component {
     eTitle: '',
     eBody: '',
     eComment: '',
-    initialized: false
+    eEditingComment: '',
+    initialized: false,
+    editingComment: null
   }
 
   getPostId = () => this.props.match.params.post
@@ -23,7 +25,10 @@ class Post extends React.Component {
   }
 
   componentDidMount() {
-    this.props.load(this.getPostId())
+    this.props.load(this.getPostId(), () => {
+      const category = this.props.match.params.category
+      this.props.history.push(`/${category}?notfound=true`)
+    })
   }
 
   commentVoteUp = (commentId) => {
@@ -81,6 +86,25 @@ class Post extends React.Component {
     this.props.postVoteDown(this.props.post.id)
   }
 
+  onCommentEdit = (id) => {
+    const { commentEdit, comments } = this.props
+    const { editingComment, eEditingComment } = this.state
+    if(editingComment && editingComment === id) {
+      commentEdit(id, eEditingComment, () => {
+        this.setState({
+          editingComment: null,
+          eEditingComment: ''
+        })
+      })
+    }
+    else {
+      this.setState({ 
+        editingComment: id,
+        eEditingComment: comments.filter(c => c.id === id)[0].body
+      })
+    }
+  }
+
   render() {
     return <Component
       {...this.state}
@@ -96,6 +120,7 @@ class Post extends React.Component {
       onCommentDelete={this.onCommentDelete}
       postVoteUp={this.postVoteUp}
       postVoteDown={this.postVoteDown}
+      onCommentEdit={this.onCommentEdit}
       />
   }
 

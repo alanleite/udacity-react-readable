@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { denormalize } from 'normalizr'
 import { PostSchema, CommentSchema } from '../../module/schemas'
-import { load, postEdit, postDelete, commentAdd, commentDelete, commentVoteUp, commentVoteDown } from './actions'
+import { load, postEdit, postDelete, commentAdd, commentEdit, commentDelete, commentVoteUp, commentVoteDown } from './actions'
 import { postVoteUp, postVoteDown } from '../posts/actions'
 
 const stateToProps = (state) => {
@@ -18,10 +18,11 @@ const stateToProps = (state) => {
 
 const dispatchToProps = (dispatch) => {
   return {
-    load: (c) => dispatch(load(c)),
+    load: (c, a) => dispatch(load(c, a)),
     postEdit: (i, d, c) => dispatch(postEdit(i, d, c)),
     postDelete: (i, c) => dispatch(postDelete(i, c)),
     commentAdd: (i, d, c) => dispatch(commentAdd(i, d, c)),
+    commentEdit: (i, d, c) => dispatch(commentEdit(i, d, c)),
     commentDelete: (i) => dispatch(commentDelete(i)),
     commentVoteUp: (c) => dispatch(commentVoteUp(c)),
     commentVoteDown: (c) => dispatch(commentVoteDown(c)),

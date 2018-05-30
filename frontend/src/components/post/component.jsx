@@ -20,7 +20,7 @@ export default ({ post, postVoteUp, postVoteDown, postDelete }) => {
       <Item.Image size='tiny' src={`https://api.adorable.io/avatars/169/${author}@adorable.png`} rounded />
       <Item.Content>
         <Item.Header>{title}</Item.Header>
-        <Item.Meta>{author + castDate(timestamp)}</Item.Meta>
+        <Item.Meta>{author + ' - ' + castDate(timestamp)}</Item.Meta>
         <Item.Description>{body}</Item.Description>
         <LabelsBlock>
           <Label.Group>

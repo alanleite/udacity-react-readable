@@ -6,6 +6,8 @@ const castDate = (d) => (new Date(d)).toDateString()
 
 export default ({
   editing,
+  editingComment,
+  eEditingComment,
   post,
   comments = [],
   eTitle,
@@ -22,7 +24,8 @@ export default ({
   onPostDelete,
   onCommentDelete,
   postVoteUp,
-  postVoteDown
+  postVoteDown,
+  onCommentEdit
 }) => {
   if (loading || !post) return <Loader active />
 
@@ -47,7 +50,7 @@ export default ({
             <Grid>
               <Grid.Column width={12}>
                 <Header as='h3' dividing>{title}</Header>
-                <p>{body}</p>
+                <p style={{ fontSize: 20 }}>{body}</p>
               </Grid.Column>
               <Grid.Column width={4}>
                 <Grid textAlign='center'>
@@ -88,7 +91,19 @@ export default ({
                   <Comment.Metadata>
                     <div>{castDate(c.timestamp)}</div>
                   </Comment.Metadata>
-                  <Comment.Text>{c.body}</Comment.Text>
+                  { editingComment !== c.id
+                    ? <Comment.Text style={{ fontSize: 16 }}>{c.body}</Comment.Text>
+                    : (
+                      <Form style={{ paddingBottom: 20 }}>
+                        <Form.Field
+                          width={8}
+                          control={Form.TextArea}
+                          name='eEditingComment'
+                          value={eEditingComment}
+                          onChange={onChange} />
+                      </Form>
+                    )
+                  }
                   <Comment.Metadata>
                     <Label.Group size='small'>
                       <Label basic content='Vote score: ' detail={c.voteScore} />
@@ -104,6 +119,12 @@ export default ({
                         color='blue'
                         content='Dislike'
                         onClick={() => { commentVoteDown(c.id) }} />
+                      <Label
+                        basic={editingComment !== c.id}
+                        as='a'
+                        color='blue'
+                        content={editingComment === c.id ? 'Salvar' : 'Editar'}
+                        onClick={() => { onCommentEdit(c.id) }} />
                       <Label
                         basic
                         as='a'
