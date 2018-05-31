@@ -25,10 +25,7 @@ class Post extends React.Component {
   }
 
   componentDidMount() {
-    this.props.load(this.getPostId(), () => {
-      const category = this.props.match.params.category
-      this.props.history.push(`/${category}?notfound=true`)
-    })
+    this.props.load(this.getPostId())
   }
 
   commentVoteUp = (commentId) => {

@@ -18,13 +18,6 @@ const PostsBlock = styled.div`
   }
 `
 
-const NotFoundText = styled.p`
-    padding-top: 0px;
-    margin-bottom: 0px;
-    font-size: 16px;
-    color: darkred;
-`
-
 export default ({
   history,
   sortBy,
@@ -38,8 +31,7 @@ export default ({
   postVoteDown,
   postDelete,
   sortByScore,
-  sortByCreationDate,
-  notFound
+  sortByCreationDate
 }) => (
   <Grid container>
     <Grid.Row>
@@ -99,7 +91,6 @@ export default ({
     <Grid.Row>
       <Grid.Column>
         <PostsBlock>
-          { notFound && <NotFoundText>Sorry, the post you are looking for no longer exists.</NotFoundText> }
           <p>Showing {posts.length} posts from {category || 'all'}</p>
           <Item.Group divided size='large'>
             {posts.map((p, i) => (

@@ -45,12 +45,7 @@ class Main extends React.Component {
                 return posts
         }
     }
-
-    hasNotFound = () => {
-        const search = this.props.location.search
-        return search && search.lastIndexOf('notfound') > -1
-    }
-
+    
     render() {
         return <Component
             {...this.props}
@@ -62,7 +57,6 @@ class Main extends React.Component {
             postDelete={this.postDelete} 
             sortByScore={this.sortByScore}
             sortByCreationDate={this.sortByCreationDate}
-            notFound={this.hasNotFound()}
             />
     }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Grid, Header, Comment, Image, Loader, Button, Label, Form, Statistic } from 'semantic-ui-react'
+import { Grid, Header, Comment, Image, Loader, Button, Label, Form, Statistic, Container } from 'semantic-ui-react'
 
 const castDate = (d) => (new Date(d)).toDateString()
 
@@ -27,7 +27,15 @@ export default ({
   postVoteDown,
   onCommentEdit
 }) => {
-  if (loading || !post) return <Loader active />
+  if (loading) return <Loader active />
+  if (!post) {
+    return (
+      <Container>
+        <h3>Post not found</h3>
+        <Link to={`/`}>Show all posts</Link><br />
+      </Container>
+    )
+  }
 
   const { id, author, title, body, category, voteScore } = post
 
